@@ -10,7 +10,11 @@
     "skipDefaultLibCheck": true,
     "strict": true,
     "lib": ["es6", "dom"],
-    "types": ["webpack-env"]
+    "types": ["webpack-env", "node"],
+    "typeRoots": [
+      // add path to @types
+      "node_modules/@types"
+    ]
   },
   "exclude": [
       "bin",

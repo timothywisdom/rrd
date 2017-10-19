@@ -8,7 +8,7 @@ import { createServerRenderer, RenderResult } from 'aspnet-prerendering';
 import { routes } from './routes';
 import configureStore from './configureStore';
 
-export default createServerRenderer(params => {
+export default createServerRenderer((params) => {
     return new Promise<RenderResult>((resolve, reject) => {
         // Prepare Redux store with in-memory history, and dispatch a navigation event
         // corresponding to the incoming URL
@@ -32,13 +32,13 @@ export default createServerRenderer(params => {
             resolve({ redirectUrl: routerContext.url });
             return;
         }
-        
+
         // Once any async tasks are done, we can perform the final render
         // We also send the redux store state, so the client can continue execution where the server left off
         params.domainTasks.then(() => {
             resolve({
                 html: renderToString(app),
-                globals: { initialReduxState: store.getState() }
+                globals: { initialReduxState: store.getState() },
             });
         }, reject); // Also propagate any errors back into the host application
     });
