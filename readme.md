@@ -1,6 +1,6 @@
-#Installation
+# Installation
 
-##Prequisites:
+## Prequisites:
 1) Install NodeJS (version 6 or higher)
 https://nodejs.org/en/
 
@@ -18,13 +18,13 @@ https://code.visualstudio.com/
     5) https://marketplace.visualstudio.com/items?itemName=dbaeumer.jshint
 
 
-##Install Instructions:
+## Install Instructions:
 1) Clone Repo
 2) run `npm install`
 3) run `dotnet run` (once to build the wwwroot/dist folder). `Ctrl+C` to cancel this once it's been built once
 4)
 
-#Notes about this stack
+# Notes about this stack
 
 Creators Blog Post:
 http://blog.stevensanderson.com/2016/05/02/angular2-react-knockout-apps-on-aspnet-core/
