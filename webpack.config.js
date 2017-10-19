@@ -30,14 +30,13 @@ module.exports = (env) => {
                     loader: ExtractTextPlugin.extract({
                         fallback: 'style-loader', // The backup style loader
                         use: isDevBuild ? 'css-loader?sourceMap!sass-loader?sourceMap' : 'css-loader?minimize!sass-loader'
-                        //use: isDevBuild ? 'css-loader' : 'css-loader?minimize'
                     })
                 }
             ]
         },
         plugins: [
             new CheckerPlugin(),
-            new ExtractTextPlugin('site.css')
+            new ExtractTextPlugin('site.css') // Name of main css file for site
         ]
     });
 
@@ -45,18 +44,6 @@ module.exports = (env) => {
     const clientBundleOutputDir = './wwwroot/dist';
     const clientBundleConfig = merge(sharedConfig(), {
         entry: { 'main-client': './ClientApp/boot-client.tsx' },
-        // module: {
-        //     rules: [
-        //         {
-        //             test: /\.scss$|\.css$/,
-        //             loader: ExtractTextPlugin.extract({
-        //                 fallback: 'style-loader', // The backup style loader
-        //                 use: isDevBuild ? 'css-loader?sourceMap!sass-loader?sourceMap' : 'css-loader?minimize!sass-loader'
-        //                 //use: isDevBuild ? 'css-loader' : 'css-loader?minimize'
-        //             })
-        //         }
-        //     ]
-        // },
         output: { path: path.join(__dirname, clientBundleOutputDir) },
         plugins: [
             //new ExtractTextPlugin('site.css'),

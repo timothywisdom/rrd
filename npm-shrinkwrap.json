@@ -9,7 +9,7 @@
     },
     "@types/node": {
       "version": "8.0.7",
-      "from": "@types/node@*",
+      "from": "https://registry.npmjs.org/@types/node/-/node-8.0.7.tgz",
       "resolved": "https://registry.npmjs.org/@types/node/-/node-8.0.7.tgz"
     },
     "@types/react": {
