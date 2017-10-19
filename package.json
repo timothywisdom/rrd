@@ -45,5 +45,8 @@
     "webpack": "2.5.1",
     "webpack-hot-middleware": "2.18.2",
     "webpack-merge": "4.1.0"
+  },
+  "jshintConfig": {
+    "esversion": 6
   }
 }
