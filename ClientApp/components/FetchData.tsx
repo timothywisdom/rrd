@@ -53,7 +53,7 @@ class FetchData extends React.Component<WeatherForecastProps, {}> {
                         <td>{ forecast.temperatureC }</td>
                         <td>{ forecast.temperatureF }</td>
                         <td>{ forecast.summary }</td>
-                    </tr>,
+                    </tr>
                 )}
                 </tbody>
             </table>
@@ -74,5 +74,5 @@ class FetchData extends React.Component<WeatherForecastProps, {}> {
 
 export default connect(
     (state: IApplicationState) => state.weatherForecasts, // Selects which state properties are merged into the component's props
-    WeatherForecastsState.actionCreators,                // Selects which action creators are merged into the component's props
+    WeatherForecastsState.actionCreators                  // Selects which action creators are merged into the component's props
 )(FetchData) as typeof FetchData;

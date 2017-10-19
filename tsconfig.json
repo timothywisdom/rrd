@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
+    "allowJs": true,
     "baseUrl": ".",
+    "checkJs": true,
     "module": "es2015",
     "moduleResolution": "node",
     "target": "es5",
@@ -10,10 +12,11 @@
     "skipDefaultLibCheck": true,
     "strict": true,
     "lib": ["es6", "dom"],
-    "types": ["webpack-env", "node"],
+    //"types": ["webpack-env", "node"],
     "typeRoots": [
       // add path to @types
-      "node_modules/@types"
+      //"node_modules/@types",
+      "node_modules/"
     ]
   },
   "exclude": [

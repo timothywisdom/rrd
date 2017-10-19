@@ -1,4 +1,4 @@
-import { Action, Reducer } from 'redux';
+import { Action, Reducer } from 'Redux';
 
 // -----------------
 // STATE - This defines the type of data maintained in the Redux store.
