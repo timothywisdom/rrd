@@ -1,6 +1,6 @@
--- Installation --
+#Installation
 
-Prequisites:
+##Prequisites:
 1) Install NodeJS (version 6 or higher)
 https://nodejs.org/en/
 
@@ -10,7 +10,21 @@ https://www.microsoft.com/net/core#windowscmd
 3) Install VS Code (recommended IDE)
 https://code.visualstudio.com/
 
--- Notes about this stack --
+4) In VS Code install the following extensions:
+    1) https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint
+    2) https://marketplace.visualstudio.com/items?itemName=eg2.tslint
+    3) https://marketplace.visualstudio.com/items?itemName=HookyQR.beautify
+    4) https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp
+    5) https://marketplace.visualstudio.com/items?itemName=dbaeumer.jshint
+
+
+##Install Instructions:
+1) Clone Repo
+2) run `npm install`
+3) run `dotnet run` (once to build the wwwroot/dist folder). `Ctrl+C` to cancel this once it's been built once
+4)
+
+#Notes about this stack
 
 Creators Blog Post:
 http://blog.stevensanderson.com/2016/05/02/angular2-react-knockout-apps-on-aspnet-core/
