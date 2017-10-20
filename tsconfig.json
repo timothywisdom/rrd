@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "allowJs": true,
+    "allowJs": false,
     "baseUrl": ".",
-    "checkJs": true,
+    "checkJs": false,
     "module": "es2015",
     "moduleResolution": "node",
     "target": "es5",
@@ -15,7 +15,7 @@
     //"types": ["webpack-env", "node"],
     "typeRoots": [
       // add path to @types
-      "node_modules/",
+      //"node_modules/",
       "node_modules/@types"
     ]
   },
