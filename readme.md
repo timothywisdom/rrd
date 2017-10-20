@@ -11,11 +11,9 @@ https://www.microsoft.com/net/core#windowscmd
 https://code.visualstudio.com/
 
 4) In VS Code install the following extensions:
-    1) https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint
-    2) https://marketplace.visualstudio.com/items?itemName=eg2.tslint
-    3) https://marketplace.visualstudio.com/items?itemName=HookyQR.beautify
-    4) https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp
-    5) https://marketplace.visualstudio.com/items?itemName=dbaeumer.jshint
+    1) https://marketplace.visualstudio.com/items?itemName=eg2.tslint
+    2) https://marketplace.visualstudio.com/items?itemName=HookyQR.beautify
+    3) https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp
 
 
 ## Install Instructions:

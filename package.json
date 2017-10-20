@@ -1,5 +1,5 @@
 {
-  "name": "reactredux2",
+  "name": "react_redux_dotnetcore",
   "private": true,
   "version": "0.0.0",
   "dependencies": {
@@ -26,7 +26,6 @@
     "file-loader": "0.11.2",
     "history": "4.6.3",
     "jquery": "3.2.1",
-    "jshint": "^2.9.5",
     "json-loader": "0.5.4",
     "node-noop": "1.0.0",
     "node-sass": "^4.5.3",
@@ -47,15 +46,8 @@
     "webpack-merge": "4.1.0"
   },
   "devDependencies": {
-    "babel-eslint": "^8.0.1",
-    "eslint": "^4.9.0",
     "eslint-config-airbnb": "^16.1.0",
-    "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-jsx-a11y": "^6.0.2",
-    "eslint-plugin-react": "^7.4.0",
-    "tslint": "^5.7.0"
-  },
-  "jshintConfig": {
-    "esversion": 6
+    "tslint": "^5.7.0",
+    "tslint-eslint-rules": "^4.1.1"
   }
 }
