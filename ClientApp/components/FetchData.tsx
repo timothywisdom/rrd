@@ -1,4 +1,3 @@
-import '../css/components/foo.scss';
 import * as React from 'React';
 import { connect } from 'react-redux';
 import { Link, RouteComponentProps } from 'react-router-dom';
@@ -13,7 +12,6 @@ type WeatherForecastProps =
 
 class FetchData extends React.Component<WeatherForecastProps, {}> {
 	public componentWillMount() {
-		console.log('componentWillMount', this, this.props);
 		// This method runs when the component is first added to the page
 		const startDateIndex = parseInt(this.props.match.params.startDateIndex, 10) || 0;
 		this.props.requestWeatherForecasts(startDateIndex);

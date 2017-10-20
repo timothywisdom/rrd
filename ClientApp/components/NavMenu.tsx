@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { NavLink, Link } from 'react-router-dom';
+import '../css/components/NavMenu.scss';
 
 export class NavMenu extends React.Component<{}, {}> {
 	public render() {
@@ -12,7 +13,7 @@ export class NavMenu extends React.Component<{}, {}> {
 						<span className='icon-bar'></span>
 						<span className='icon-bar'></span>
 					</button>
-					<Link className='navbar-brand' to={ '/' }>reactRedux2</Link>
+					<Link className='navbar-brand' to={ '/' }>react redux</Link>
 				</div>
 				<div className='clearfix'></div>
 				<div className='navbar-collapse collapse'>
