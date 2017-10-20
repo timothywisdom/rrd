@@ -19,7 +19,7 @@ https://code.visualstudio.com/
 ## Install Instructions:
 1) Clone this repo
 2) run `npm install --verbose` (and go make some tea)
-3) run `dotnet run` (once to build the wwwroot/dist folder). `Ctrl+C` to cancel this once it's been built once
+3) run `dotnet run` (once -- to build the /wwwroot/dist folder). `Ctrl+C` to cancel this
 
 # Notes about this stack
 

@@ -24,8 +24,19 @@ type KnownAction = IIncrementCountAction | IDecrementCountAction;
 // They don't directly mutate state, but they can have external side-effects (such as loading data).
 
 export const actionCreators = {
-	increment: () => <IIncrementCountAction> { type: 'INCREMENT_COUNT' },
-	decrement: () => <IDecrementCountAction> { type: 'DECREMENT_COUNT' },
+	// increment: () => <IIncrementCountAction> { type: 'INCREMENT_COUNT' },
+	increment: () => {
+		return {
+			type: 'INCREMENT_COUNT',
+		} as IIncrementCountAction;
+	},
+
+	// decrement: () => <IDecrementCountAction> { type: 'DECREMENT_COUNT' },
+	decrement: () => {
+		return {
+			type: 'DECREMENT_COUNT',
+		} as IDecrementCountAction;
+	},
 };
 
 // ----------------
