@@ -64,6 +64,7 @@ const unloadedState: IWeatherForecastsState = { forecasts: [], isLoading: false 
 
 export const reducer: Reducer<IWeatherForecastsState> = (state: IWeatherForecastsState, incomingAction: Action) => {
 	const action = incomingAction as KnownAction;
+
 	switch (action.type) {
 		case 'REQUEST_WEATHER_FORECASTS':
 			return {
