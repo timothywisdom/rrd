@@ -5,6 +5,7 @@
     ],
     "jsRules": {},
     "rules": {
+        "indent": [true, "tabs", 4],
         "max-line-length": false,
         "no-angle-bracket-type-assertion": false,
         "object-literal-shorthand": false,

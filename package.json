@@ -40,7 +40,6 @@
     "redux-thunk": "2.2.0",
     "sass-loader": "^6.0.6",
     "style-loader": "0.18.2",
-    "tslint": "^5.7.0",
     "typescript": "2.4.1",
     "url-loader": "0.5.9",
     "webpack": "2.5.1",
@@ -53,7 +52,8 @@
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",
-    "eslint-plugin-react": "^7.4.0"
+    "eslint-plugin-react": "^7.4.0",
+    "tslint": "^5.7.0"
   },
   "jshintConfig": {
     "esversion": 6

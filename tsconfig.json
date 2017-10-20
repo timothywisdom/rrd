@@ -15,8 +15,8 @@
     //"types": ["webpack-env", "node"],
     "typeRoots": [
       // add path to @types
-      //"node_modules/@types",
-      "node_modules/"
+      "node_modules/",
+      "node_modules/@types"
     ]
   },
   "exclude": [
