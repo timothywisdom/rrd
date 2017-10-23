@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Provider } from 'react-redux';
+import { addLocaleData, IntlProvider } from 'react-intl';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import { replace } from 'react-router-redux';
@@ -7,6 +8,8 @@ import { createMemoryHistory } from 'history';
 import { createServerRenderer, RenderResult } from 'aspnet-prerendering';
 import { routes } from './routes';
 import configureStore from './configureStore';
+import * as fs from 'fs';
+import * as path from 'path';
 
 export default createServerRenderer((params) => {
 	return new Promise<RenderResult>((resolve, reject) => {
@@ -17,13 +20,27 @@ export default createServerRenderer((params) => {
 		const store = configureStore(createMemoryHistory());
 		store.dispatch(replace(urlAfterBasename));
 
+		// Localization
+		const locale: string = 'fr';
+		const messages: any = {};
+		const localeData: any = {};
+		['en', 'fr'].forEach(
+			(iterLocale) => {
+				localeData[locale] = fs.readFileSync(`/programs/reactRedux2/node_modules/react-intl/locale-data/${locale}.js`).toString();
+				// localeData[iterLocale] = require(`../node_modules/react-intl/locale-data/${iterLocale}.js`); // fs.readFileSync(path.join(__dirname, `../node_modules/react-intl/locale-data/${locale}.js`)).toString();
+				messages[iterLocale] = require(`./assets/i18n/${iterLocale}.json`);
+			}
+		);
+
 		// Prepare an instance of the application and perform an inital render that will
 		// cause any async tasks (e.g., data access) to begin
 		const routerContext: any = {};
 		const app = (
-			<Provider store={ store }>
-				<StaticRouter basename={ basename } context={ routerContext } location={ params.location.path } children={ routes } />
-			</Provider>
+			<IntlProvider locale={locale} messages={messages[locale]}>
+				<Provider store={ store }>
+					<StaticRouter basename={ basename } context={ routerContext } location={ params.location.path } children={ routes } />
+				</Provider>
+			</IntlProvider>
 		);
 		renderToString(app);
 
