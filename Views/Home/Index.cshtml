@@ -1,8 +1,14 @@
 @{
     ViewData["Title"] = "Home Page";
+    var foo = "bar";
 }
 
-<div id="react-app" asp-prerender-module="ClientApp/dist/main-server">Loading...</div>
+<div id="react-app" asp-prerender-module="ClientApp/dist/main-server"
+                asp-prerender-data="new {
+                    IsGoldUser = true,
+                    Cookies = ViewContext.HttpContext.Request.Cookies,
+                    foobarString = foo
+                 }">Loading...</div>
 
 @section scripts {
     <script src="~/dist/main-client.js" asp-append-version="true"></script>

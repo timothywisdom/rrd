@@ -25,18 +25,10 @@ module.exports = (env) => {
                     test: /\.(png|jpg|jpeg|gif|svg)$/,
                     use: 'url-loader?limit=25000'
                 },
-                {
-                    test: /\.scss$|\.css$/,
-                    loader: ExtractTextPlugin.extract({
-                        fallback: 'style-loader', // The backup style loader
-                        use: isDevBuild ? 'css-loader?sourceMap!sass-loader?sourceMap' : 'css-loader?minimize!sass-loader'
-                    })
-                }
             ]
         },
         plugins: [
             new CheckerPlugin(),
-            new ExtractTextPlugin('site.css') // Name of main css file for site
         ]
     });
 
@@ -45,12 +37,24 @@ module.exports = (env) => {
     const clientBundleConfig = merge(sharedConfig(), {
         entry: { 'main-client': './ClientApp/boot-client.tsx' },
         output: { path: path.join(__dirname, clientBundleOutputDir) },
+        module: {
+            rules: [
+                {
+                    test: /\.(scss|sass|css)$/,
+                    loader: isDevBuild ? 'style-loader!css-loader!sass-loader'
+                        : ExtractTextPlugin.extract({
+                            fallback: 'style-loader', // The backup style loader
+                            use: 'css-loader?minimize!sass-loader'
+                        })
+                },
+            ]
+        },
         plugins: [
-            //new ExtractTextPlugin('site.css'),
             new webpack.DllReferencePlugin({
                 context: __dirname,
                 manifest: require('./wwwroot/dist/vendor-manifest.json')
-            })
+            }),
+            // new ExtractTextPlugin('site.css') // Name of main css file for site
         ].concat(isDevBuild ? [
             // Plugins that apply in development builds only
             new webpack.SourceMapDevToolPlugin({
@@ -67,18 +71,30 @@ module.exports = (env) => {
     const serverBundleConfig = merge(sharedConfig(), {
         resolve: { mainFields: ['main'] },
         entry: { 'main-server': './ClientApp/boot-server.tsx' },
+        output: {
+            libraryTarget: 'commonjs',
+            path: path.join(__dirname, './ClientApp/dist')
+        },
+        module: {
+            rules: [
+                {
+                    test: /\.(scss|sass|css)$/,
+                    loader: ExtractTextPlugin.extract({
+                                fallback: 'style-loader', // The backup style loader
+                                use: isDevBuild ? 'css-loader?sourceMap!sass-loader?sourceMap' : 'css-loader?minimize!sass-loader'
+                            })
+                },
+            ]
+        },
         plugins: [
             new webpack.DllReferencePlugin({
                 context: __dirname,
                 manifest: require('./ClientApp/dist/vendor-manifest.json'),
                 sourceType: 'commonjs2',
                 name: './vendor'
-            })
+            }),
+            new ExtractTextPlugin('site.css') // Name of main css file for site
         ],
-        output: {
-            libraryTarget: 'commonjs',
-            path: path.join(__dirname, './ClientApp/dist')
-        },
         target: 'node',
         devtool: 'inline-source-map'
     });
