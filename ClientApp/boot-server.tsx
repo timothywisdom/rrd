@@ -20,13 +20,12 @@ export default createServerRenderer((params) => {
 		const store = configureStore(createMemoryHistory());
 		store.dispatch(replace(urlAfterBasename));
 
-		// Localization
-		const locale: string = 'fr';
+		const locale: string = 'en'; // params.data.locale || 'en';
 		const messages: any = {};
 		const localeData: any = {};
 		['en', 'fr'].forEach(
 			(iterLocale) => {
-				localeData[locale] = fs.readFileSync(`/programs/reactRedux2/node_modules/react-intl/locale-data/${locale}.js`).toString();
+				localeData[locale] = fs.readFileSync(`/projects/P2Web/node_modules/react-intl/locale-data/${locale}.js`).toString();
 				// localeData[iterLocale] = require(`../node_modules/react-intl/locale-data/${iterLocale}.js`); // fs.readFileSync(path.join(__dirname, `../node_modules/react-intl/locale-data/${locale}.js`)).toString();
 				messages[iterLocale] = require(`./assets/i18n/${iterLocale}.json`);
 			}

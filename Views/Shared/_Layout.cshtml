@@ -1,13 +1,25 @@
+@{
+    ViewData["locale"] = ViewData["locale"]?.ToString() ?? "fr";
+}
+
 <!DOCTYPE html>
 <html>
 <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="@ViewData["locale"]" />
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="google" content="notranslate">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>@ViewData["Title"]</title>
+
     <base href="~/" />
 
-    <link rel="stylesheet" href="~/dist/vendor.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/dist/site.css" asp-append-version="true" />
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans|Roboto:200,300,400,500,600,700' type="text/css" />
+    <link rel="stylesheet" href="~/dist/vendor.css" type="text/css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/dist/site.css" type="text/css" asp-append-version="true" />
 </head>
 <body>
     @RenderBody()

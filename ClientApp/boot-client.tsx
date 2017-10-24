@@ -12,8 +12,9 @@ import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 import { createBrowserHistory } from 'history';
 import configureStore from './configureStore';
-import { IApplicationState } from './store';
+import { IApplicationState, reducers } from './store';
 import * as RoutesModule from './routes';
+import acceptLanguage from 'accept-language';
 let routes = RoutesModule.routes;
 
 // Create browser history to use in the Redux store
@@ -25,7 +26,18 @@ const initialState = (window as any).initialReduxState as IApplicationState;
 const store = configureStore(history, initialState);
 
 // Localization
-const locale: string = 'fr';
+function getLanguageFromContentLangageMeta() {
+	let langLocale: (string | null) = null;
+	const meta = document.querySelectorAll('meta[http-equiv="Content-Language"]');
+	if (meta.length > 0) {
+		langLocale = meta[0].getAttribute('content');
+	}
+	console.log('getLanguageFromContentLangageMeta', langLocale);
+	return langLocale;
+}
+
+acceptLanguage.languages(['en-GB', 'en-US', 'en', 'fr']); // Provide the languages that we accept
+const locale: string = getLanguageFromContentLangageMeta() || 'en';
 const localeData: any = {};
 const messages: any = {};
 ['en', 'fr'].forEach(
@@ -52,6 +64,11 @@ function renderApp() {
 }
 
 renderApp();
+
+store.dispatch( {
+	type: 'UPDATE_LOCALE',
+	payload: locale,
+} );
 
 // Allow Hot Module Replacement
 if (module.hot) {

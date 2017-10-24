@@ -2,14 +2,12 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router-dom';
 import { IApplicationState } from '../store';
-import * as CounterStore from '../store/Counter';
 import { FormattedMessage } from 'react-intl';
+import * as LocaleStore from '../store/Locale';
 
-interface IHome {
-	locale: string;
-}
-
-type HomeProps = IHome & RouteComponentProps<{}>;
+type HomeProps = LocaleStore.ILocale
+				& typeof LocaleStore.actionCreators
+				& RouteComponentProps<{}>;
 
 // class Home extends React.Component<RouteComponentProps<{}>, {}> {
 class Home extends React.Component<HomeProps, {}> {
@@ -48,13 +46,13 @@ const mapStateToProps = ( state: IApplicationState ) => {
 };
 
 const mapDispatchToProps = ( dispatch: any ) => {
-	return {};
+	return LocaleStore.actionCreators;
 };
 
 // Wire up the React component to the Redux store
 export default connect(
-	// (state: IApplicationState) => state.locale,  // Selects which state properties are merged into the component's props
-	mapStateToProps,								// Selects which state properties are merged into the component's props
-	// CounterStore.actionCreators                  // Selects which action creators are merged into the component's props
-	mapDispatchToProps 								// Selects which action creators are merged into the component's props
+	(state: IApplicationState) => state.locale,  // Selects which state properties are merged into the component's props
+	// mapStateToProps,								// Selects which state properties are merged into the component's props
+	LocaleStore.actionCreators                   // Selects which action creators are merged into the component's props
+	// mapDispatchToProps 								// Selects which action creators are merged into the component's props
 )(Home) as typeof Home;

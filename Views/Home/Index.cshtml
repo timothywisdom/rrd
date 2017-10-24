@@ -1,8 +1,12 @@
 @{
     ViewData["Title"] = "Home Page";
+    string localeString = ViewData["locale"]?.ToString() ?? "fr";
+    var fooger = new {
+        foo: "bar"
+    }
 }
 
-<div id="react-app" asp-prerender-module="ClientApp/dist/main-server">Loading...</div>
+<div id="react-app" asp-prerender-module="ClientApp/dist/main-server" asp-prerender-data="@fooger" >Loading...</div>
 
 @section scripts {
     <script src="~/dist/main-client.js" asp-append-version="true"></script>
