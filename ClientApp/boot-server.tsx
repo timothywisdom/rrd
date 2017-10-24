@@ -1,15 +1,15 @@
+import { createServerRenderer, RenderResult } from 'aspnet-prerendering';
+import * as fs from 'fs';
+import { createMemoryHistory } from 'history';
+import * as path from 'path';
 import * as React from 'react';
-import { Provider } from 'react-redux';
-import { addLocaleData, IntlProvider } from 'react-intl';
 import { renderToString } from 'react-dom/server';
+import { addLocaleData, IntlProvider } from 'react-intl';
+import { Provider } from 'react-redux';
 import { StaticRouter } from 'react-router-dom';
 import { replace } from 'react-router-redux';
-import { createMemoryHistory } from 'history';
-import { createServerRenderer, RenderResult } from 'aspnet-prerendering';
-import { routes } from './routes';
 import configureStore from './configureStore';
-import * as fs from 'fs';
-import * as path from 'path';
+import { routes } from './routes';
 
 export default createServerRenderer((params) => {
 	return new Promise<RenderResult>((resolve, reject) => {
@@ -20,7 +20,7 @@ export default createServerRenderer((params) => {
 		const store = configureStore(createMemoryHistory());
 		store.dispatch(replace(urlAfterBasename));
 
-		const locale: string = 'en'; // params.data.locale || 'en';
+		const locale: string = (params.data.localeLang || 'en').substring(0, 2);
 		const messages: any = {};
 		const localeData: any = {};
 		['en', 'fr'].forEach(

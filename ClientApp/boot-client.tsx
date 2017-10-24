@@ -1,20 +1,20 @@
-import './css/site.scss';
+import acceptLanguage from 'accept-language';
 import 'bootstrap';
 import * as fs from 'fs';
+import { createBrowserHistory } from 'history';
 import * as path from 'path';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import { AppContainer } from 'react-hot-loader';
 import { addLocaleData, IntlProvider } from 'react-intl';
 import * as en from 'react-intl/locale-data/en';
 import * as fr from 'react-intl/locale-data/fr';
-import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
-import { createBrowserHistory } from 'history';
+import config from './config/config';
 import configureStore from './configureStore';
-import { IApplicationState, reducers } from './store';
 import * as RoutesModule from './routes';
-import acceptLanguage from 'accept-language';
+import { IApplicationState, reducers } from './store';
 let routes = RoutesModule.routes;
 
 // Create browser history to use in the Redux store
@@ -26,17 +26,20 @@ const initialState = (window as any).initialReduxState as IApplicationState;
 const store = configureStore(history, initialState);
 
 // Localization
-function getLanguageFromContentLangageMeta() {
+function getLanguageFromContentLangageMeta(): (string | null) {
 	let langLocale: (string | null) = null;
 	const meta = document.querySelectorAll('meta[http-equiv="Content-Language"]');
 	if (meta.length > 0) {
 		langLocale = meta[0].getAttribute('content');
+		if (langLocale) {
+			langLocale = langLocale.substring(0, 2);
+		}
 	}
 	console.log('getLanguageFromContentLangageMeta', langLocale);
 	return langLocale;
 }
 
-acceptLanguage.languages(['en-GB', 'en-US', 'en', 'fr']); // Provide the languages that we accept
+acceptLanguage.languages(config.supported_languages); // Provide the languages that we accept
 const locale: string = getLanguageFromContentLangageMeta() || 'en';
 const localeData: any = {};
 const messages: any = {};

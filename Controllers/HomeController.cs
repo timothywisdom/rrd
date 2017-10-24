@@ -1,17 +1,18 @@
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using System.Globalization;
+using System.Threading;
 
 namespace reactRedux2.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : ApplicationController
     {
         public IActionResult Index()
         {
-            return View();
+			CultureInfo thisCulture = Thread.CurrentThread.CurrentCulture;
+			ViewData["locale"] = thisCulture.CompareInfo.Name;
+
+			return View();
         }
 
         public IActionResult Error()

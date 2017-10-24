@@ -1,14 +1,15 @@
 @{
     ViewData["Title"] = "Home Page";
-    var foo = "bar";
+    ViewData["locale"] = ViewData["locale"]?.ToString() ?? "fr";
+    var localeLang = ViewData["locale"];
 }
 
-<div id="react-app" asp-prerender-module="ClientApp/dist/main-server"
-                asp-prerender-data="new {
-                    IsGoldUser = true,
-                    Cookies = ViewContext.HttpContext.Request.Cookies,
-                    foobarString = foo
-                 }">Loading...</div>
+<div id="react-app"
+     asp-prerender-module="ClientApp/dist/main-server"
+     asp-prerender-data="new {
+        Cookies = ViewContext.HttpContext.Request.Cookies,
+        localeLang = localeLang
+     }">Loading...</div>
 
 @section scripts {
     <script src="~/dist/main-client.js" asp-append-version="true"></script>

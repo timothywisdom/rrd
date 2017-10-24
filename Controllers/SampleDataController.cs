@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace reactRedux2.Controllers
 {
     [Route("api/[controller]")]
-    public class SampleDataController : Controller
+    public class SampleDataController : ApplicationController
     {
         private static string[] Summaries = new[]
         {

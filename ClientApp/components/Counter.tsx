@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Link, RouteComponentProps } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Link, RouteComponentProps } from 'react-router-dom';
 import { IApplicationState } from '../store';
 import * as CounterStore from '../store/Counter';
 import * as WeatherForecasts from '../store/WeatherForecasts';

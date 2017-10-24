@@ -1,7 +1,7 @@
 import { Action, Reducer } from 'redux';
-import * as WeatherForecasts from './WeatherForecasts';
 import * as Counter from './Counter';
 import * as Locale from './Locale';
+import * as WeatherForecasts from './WeatherForecasts';
 
 // The top-level state object
 export interface IApplicationState {

@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { NavLink, Link } from 'react-router-dom';
-import '../css/site.scss';
+import { Link, NavLink } from 'react-router-dom';
 import '../css/components/NavMenu.scss';
+import '../css/site.scss';
 
 export class NavMenu extends React.Component<{}, {}> {
 	public render() {

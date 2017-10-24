@@ -1,8 +1,8 @@
 import * as React from 'react';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router-dom';
 import { IApplicationState } from '../store';
-import { FormattedMessage } from 'react-intl';
 import * as LocaleStore from '../store/Locale';
 
 type HomeProps = LocaleStore.ILocale
