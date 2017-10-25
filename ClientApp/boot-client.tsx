@@ -6,8 +6,8 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import { addLocaleData, IntlProvider } from 'react-intl';
-import * as en from 'react-intl/locale-data/en';
-import * as fr from 'react-intl/locale-data/fr';
+// import * as en from 'react-intl/locale-data/en';
+// import * as fr from 'react-intl/locale-data/fr';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 import config from './config/config';
@@ -42,7 +42,8 @@ function renderApp() {
 
 // Localization
 function getLanguageFromContentLangageMeta(): (string | null) {
-	let langLocale: (string | null) = null;
+	// Note - we could also just return navigator.language but this is sometimes different from what the server places in the Content-Language Header
+	let langLocale: (string | null) = navigator.language || null;
 	const meta = document.querySelectorAll('meta[http-equiv="Content-Language"]');
 	if (meta.length > 0) {
 		langLocale = meta[0].getAttribute('content');
@@ -67,8 +68,9 @@ const fetchLocaleStrings = fetch(`./dist/assets/i18n/${localeBase}.json`)
 								return response.json();
 							})
 							.then((localeStrings) => {
-								localizedStrings[localeBase] = localeStrings;
-								addLocaleData([...en, ...fr]); // TODO - This needs to be dynamic
+								localizedStrings[localeBase] = localeStrings; // Add localized strings to our localizedStrings object
+								addLocaleData(require(`react-intl/locale-data/${localeBase}`)); // Fetch locale-data for this locale (pluralization rules, etc)
+								// addLocaleData([...en, ...fr]); // TODO - This needs to be dynamic
 								renderApp();
 							});
 
