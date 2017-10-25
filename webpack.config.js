@@ -19,7 +19,7 @@ module.exports = (env) => {
             rules: [
                 {
                     test: /\.tsx?$/, include: /ClientApp/,
-                    use: 'awesome-typescript-loader?silent=true'
+                    use: isDevBuild ? 'awesome-typescript-loader' : 'awesome-typescript-loader?silent=true'
                 },
                 {
                     test: /\.(png|jpg|jpeg|gif|svg)$/,

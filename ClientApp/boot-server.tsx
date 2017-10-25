@@ -23,14 +23,10 @@ export default createServerRenderer((params) => {
 		const locale: string = (params.data.localeLang || 'en').substring(0, 2);
 		const messages: any = {};
 		const localeData: any = {};
-		['en', 'fr'].forEach(
-			(iterLocale) => {
-				// localeData[locale] = fs.readFileSync(path.join(__dirname, `../node_modules/react-intl/locale-data/${locale}.js`)).toString(); // fs.readFileSync(`/projects/P2Web/node_modules/react-intl/locale-data/${locale}.js`).toString();
-				// localeData[iterLocale] = require(`../node_modules/react-intl/locale-data/${iterLocale}.js`); // fs.readFileSync(path.join(__dirname, `../node_modules/react-intl/locale-data/${locale}.js`)).toString();
-				// messages[iterLocale] = require(`./assets/i18n/${iterLocale}.json`);
-				messages[iterLocale] = require(`../wwwroot/dist/assets/i18n/${iterLocale}.json`);
-			}
-		);
+		if (fs.existsSync(`./node_modules/react-intl/locale-data/${locale}.js`)) {
+			localeData[locale] = fs.readFileSync(`./node_modules/react-intl/locale-data/${locale}.js`).toString();
+		}
+		messages[locale] = require(`../wwwroot/dist/assets/i18n/${locale}.json`);
 
 		// Prepare an instance of the application and perform an inital render that will
 		// cause any async tasks (e.g., data access) to begin

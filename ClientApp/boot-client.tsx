@@ -27,6 +27,7 @@ const store = configureStore(history, initialState);
 function renderApp() {
 	// This code starts up the React app when it runs in a browser. It sets up the routing configuration
 	// and injects the app into a DOM element.
+
 	ReactDOM.render(
 		<AppContainer>
 			<IntlProvider locale={ localeLanguageBase } messages={ messages[localeLanguageBase] }>
@@ -49,7 +50,6 @@ function getLanguageFromContentLangageMeta(): (string | null) {
 			langLocale = langLocale;
 		}
 	}
-	console.log('getLanguageFromContentLangageMeta', langLocale);
 	return langLocale;
 }
 
@@ -58,47 +58,19 @@ const localeLanguageBase: string = locale.substring(0, 2);
 const localeData: any = {};
 const messages: any = {};
 
-const fetchLanguageData = fetch(`./dist/assets/i18n/${localeLanguageBase}.json`)
+const fetchLocaleStrings = fetch(`./dist/assets/i18n/${localeLanguageBase}.json`)
 							.then((response) => {
 								if (response.status >= 400) {
-								throw new Error('Bad response from server');
+									throw new Error('Bad response from server');
 								}
 
-								const responseJSON = response.json();
-								console.log("Got back lang", responseJSON);
-								messages[localeLanguageBase] = responseJSON;
-
-								return responseJSON;
+								return response.json();
 							})
-							.then((localData) => {
+							.then((localeStrings) => {
+								messages[localeLanguageBase] = localeStrings;
 								addLocaleData([...en, ...fr]); // TODO - This needs to be dynamic
 								renderApp();
 							});
-
-// config.supported_languages.forEach(
-// 	(iterLocale) => {
-// 		// console.log("foo");
-// 		// console.log("fs", fs);
-// 		// const localeFilepath = path.resolve(__dirname, `/node_modules/react-intl/locale-data/${locale}.js`);
-// 		// console.log("localeFilepath", localeFilepath);
-// 		// localeData[locale] = fs.readFileSync(localeFilepath);
-
-// 		const languageFilepath = `./assets/i18n/${iterLocale}.json`;
-// 		// if (fs.existsSync(languageFilepath)) {
-// 		if (iterLocale === "en" || iterLocale === "fr") {
-// 			console.log("requring ", languageFilepath);
-// 			messages[iterLocale] = require(languageFilepath);
-// 		}
-//   	}
-// );
-// addLocaleData([...en, ...fr]);
-
-// renderApp();
-
-// store.dispatch( {
-// 	type: 'UPDATE_LOCALE',
-// 	payload: locale,
-// } );
 
 // Allow Hot Module Replacement
 if (module.hot) {
