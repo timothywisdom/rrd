@@ -7,7 +7,7 @@ https://nodejs.org/en/
 2) Install dotnet core (version 2 or higher)
 https://www.microsoft.com/net/core#windowscmd
 
-3) Install VS Code (recommended IDE)
+3) Install VS Code (recommended IDE) (you may also run this in VS2017)
 https://code.visualstudio.com/
 
 4) In VS Code install the following extensions:

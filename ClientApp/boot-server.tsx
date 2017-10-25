@@ -25,9 +25,10 @@ export default createServerRenderer((params) => {
 		const localeData: any = {};
 		['en', 'fr'].forEach(
 			(iterLocale) => {
-				localeData[locale] = fs.readFileSync(`/projects/P2Web/node_modules/react-intl/locale-data/${locale}.js`).toString();
+				// localeData[locale] = fs.readFileSync(path.join(__dirname, `../node_modules/react-intl/locale-data/${locale}.js`)).toString(); // fs.readFileSync(`/projects/P2Web/node_modules/react-intl/locale-data/${locale}.js`).toString();
 				// localeData[iterLocale] = require(`../node_modules/react-intl/locale-data/${iterLocale}.js`); // fs.readFileSync(path.join(__dirname, `../node_modules/react-intl/locale-data/${locale}.js`)).toString();
-				messages[iterLocale] = require(`./assets/i18n/${iterLocale}.json`);
+				// messages[iterLocale] = require(`./assets/i18n/${iterLocale}.json`);
+				messages[iterLocale] = require(`../wwwroot/dist/assets/i18n/${iterLocale}.json`);
 			}
 		);
 

@@ -18,7 +18,6 @@
     "@types/webpack": "2.2.15",
     "@types/webpack-env": "1.13.0",
     "@types/webpack-merge": "^4.1.0",
-    "accept-language": "^3.0.18",
     "aspnet-prerendering": "^3.0.1",
     "aspnet-webpack": "^2.0.1",
     "aspnet-webpack-react": "^3.0.0",

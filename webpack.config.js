@@ -29,7 +29,7 @@ module.exports = (env) => {
         },
         plugins: [
             new CheckerPlugin(),
-        ]
+        ],
     });
 
     // Configuration for client-side bundle suitable for running in browsers
