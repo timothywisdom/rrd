@@ -55,7 +55,7 @@ function getLanguageFromContentLangageMeta(): (string | null) {
 }
 
 const locale: string = getLanguageFromContentLangageMeta() || 'en';
-const localeBase: string = locale.substring(0, 2);
+const localeBase: string = locale.split('-')[0];
 const localeData: any = {};
 const localizedStrings: any = {};
 

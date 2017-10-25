@@ -22,7 +22,7 @@ export default createServerRenderer((params) => {
 
 		// Setup Localization
 		const locale: string = (params.data.localeLang || 'en'); // params.data.localeLang is passed from the dotnet server in /Views/Home/Index.cshtml
-		const localeBase: string = locale.substring(0, 2);
+		const localeBase: string = locale.split('-')[0];
 		const localizedStrings: any = {};
 		const localeData: any = {};
 		if (fs.existsSync(`./node_modules/react-intl/locale-data/${localeBase}.js`)) {
