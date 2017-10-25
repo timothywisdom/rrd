@@ -75,14 +75,15 @@ const fetchLocaleStrings = fetch(`./dist/assets/i18n/${localeBase}.json`)
 
 // Install the Service Worker on the client
 if ('serviceWorker' in navigator) {
+	// tslint:disable-next-line:no-console
 	console.log("service work exists in navigator");
 	window.addEventListener('load', () => {
 		console.log("windows loaded. registering service worker");
 		navigator.serviceWorker.register('/dist/service-worker.js').then((registration) => {
-		// Registration was successful
+			// Registration was successful
 			console.log('ServiceWorker registration successful with scope: ', registration.scope);
 		}, (err) => {
-		// registration failed :(
+			// registration failed :(
 			console.log('ServiceWorker registration failed: ', err);
 		});
 	});

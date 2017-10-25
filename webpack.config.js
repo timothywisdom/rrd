@@ -56,6 +56,10 @@ module.exports = (env) => {
                 {
                     from: './ClientApp/assets',
                     to: 'assets'
+                },
+                {
+                    from: './ClientApp/service-worker.js',
+                    to: 'service-worker.js'
                 }
             ]),
             new webpack.DllReferencePlugin({
@@ -70,7 +74,13 @@ module.exports = (env) => {
             }),
         ] : [
             // Plugins that apply in production builds only
-            new webpack.optimize.UglifyJsPlugin(),
+            new webpack.optimize.UglifyJsPlugin({
+                comments: true, // Eliminate comments
+                compress: { // Compression specific options
+                    warnings: true, // remove warnings
+                    drop_console: true, // Drop console statements
+               },
+            }),
         ])
     });
 
@@ -124,5 +134,5 @@ module.exports = (env) => {
         devtool: 'inline-source-map'
     });
 
-    return [clientBundleConfig, serviceWorkerBundleConfig, serverBundleConfig];
+    return [clientBundleConfig, serverBundleConfig];
 };

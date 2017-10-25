@@ -7,10 +7,11 @@
     "jsRules": {},
     "rules": {
         "indent": [true, "tabs", 4],
-        "ter-indent": [true, "tab", {
+        "ter-indent": [true, "tab", { // This comes from the tslint-eslint-rules package
             "SwitchCase": 1
         }],
         "max-line-length": false,
+        "no-console": false, // allow console.log. This will be disabled in production build via UglifyJsPlugin
         "object-literal-shorthand": false,
         "object-literal-sort-keys": false,
         "ordered-imports": true,
