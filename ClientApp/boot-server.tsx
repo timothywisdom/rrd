@@ -35,7 +35,7 @@ export default createServerRenderer((params) => {
 		// cause any async tasks (e.g., data access) to begin
 		const routerContext: any = {};
 		const app = (
-			<IntlProvider locale={locale} messages={localizedStrings[localeBase]}>
+			<IntlProvider locale={ locale } messages={ localizedStrings[localeBase] }>
 				<Provider store={ store }>
 					<StaticRouter basename={ basename } context={ routerContext } location={ params.location.path } children={ routes } />
 				</Provider>
