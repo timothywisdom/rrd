@@ -51,6 +51,7 @@
     "webpack-merge": "4.1.0"
   },
   "devDependencies": {
+    "copy-webpack-plugin": "^4.2.0",
     "eslint-config-airbnb": "^16.1.0",
     "tslint": "^5.7.0",
     "tslint-eslint-rules": "^4.1.1"

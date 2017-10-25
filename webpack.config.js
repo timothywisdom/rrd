@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
 const merge = require('webpack-merge');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = (env) => {
     const isDevBuild = !(env && env.prod);
@@ -18,7 +19,8 @@ module.exports = (env) => {
         module: {
             rules: [
                 {
-                    test: /\.tsx?$/, include: /ClientApp/,
+                    test: /\.tsx?$/,
+                    include: /ClientApp/,
                     use: isDevBuild ? 'awesome-typescript-loader' : 'awesome-typescript-loader?silent=true'
                 },
                 {
@@ -50,22 +52,45 @@ module.exports = (env) => {
             ]
         },
         plugins: [
+            new CopyWebpackPlugin([
+                {
+                    from: './ClientApp/assets',
+                    to: 'assets'
+                }
+            ]),
             new webpack.DllReferencePlugin({
                 context: __dirname,
                 manifest: require('./wwwroot/dist/vendor-manifest.json')
             }),
-            // new ExtractTextPlugin('site.css') // Name of main css file for site
         ].concat(isDevBuild ? [
             // Plugins that apply in development builds only
             new webpack.SourceMapDevToolPlugin({
                 filename: '[file].map', // Remove this line if you prefer inline source maps
                 moduleFilenameTemplate: path.relative(clientBundleOutputDir, '[resourcePath]') // Point sourcemap entries to the original file locations on disk
-            })
+            }),
         ] : [
             // Plugins that apply in production builds only
-            new webpack.optimize.UglifyJsPlugin()
+            new webpack.optimize.UglifyJsPlugin(),
         ])
     });
+
+    const serviceWorkerBundleConfig = {
+        entry: { 'service-worker': './ClientApp/service-worker.ts' },
+        output: {
+            path: path.join(__dirname, clientBundleOutputDir),
+            filename: '[name].js',
+            publicPath: 'dist/' // Webpack dev middleware, if enabled, handles requests for this URL prefix
+        },
+        resolve: { extensions: ['.ts', '.js'] },
+        module: {
+            rules: [
+                {
+                    test: /\.tsx?$/,
+                    use: isDevBuild ? 'awesome-typescript-loader' : 'awesome-typescript-loader?silent=true'
+                },
+            ]
+        }
+    };
 
     // Configuration for server-side (prerendering) bundle suitable for running in Node
     const serverBundleConfig = merge(sharedConfig(), {
@@ -99,5 +124,5 @@ module.exports = (env) => {
         devtool: 'inline-source-map'
     });
 
-    return [clientBundleConfig, serverBundleConfig];
+    return [clientBundleConfig, serviceWorkerBundleConfig, serverBundleConfig];
 };

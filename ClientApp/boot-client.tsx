@@ -70,9 +70,23 @@ const fetchLocaleStrings = fetch(`./dist/assets/i18n/${localeBase}.json`)
 							.then((localeStrings) => {
 								localizedStrings[localeBase] = localeStrings; // Add localized strings to our localizedStrings object
 								addLocaleData(require(`react-intl/locale-data/${localeBase}`)); // Fetch locale-data for this locale (pluralization rules, etc)
-								// addLocaleData([...en, ...fr]); // TODO - This needs to be dynamic
 								renderApp();
 							});
+
+// Install the Service Worker on the client
+if ('serviceWorker' in navigator) {
+	console.log("service work exists in navigator");
+	window.addEventListener('load', () => {
+		console.log("windows loaded. registering service worker");
+		navigator.serviceWorker.register('/dist/service-worker.js').then((registration) => {
+		// Registration was successful
+			console.log('ServiceWorker registration successful with scope: ', registration.scope);
+		}, (err) => {
+		// registration failed :(
+			console.log('ServiceWorker registration failed: ', err);
+		});
+	});
+}
 
 // Allow Hot Module Replacement
 if (module.hot) {

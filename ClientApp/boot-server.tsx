@@ -28,7 +28,7 @@ export default createServerRenderer((params) => {
 		if (fs.existsSync(`./node_modules/react-intl/locale-data/${localeBase}.js`)) {
 			localeData[localeBase] = fs.readFileSync(`./node_modules/react-intl/locale-data/${localeBase}.js`).toString();
 		}
-		localizedStrings[localeBase] = require(`../wwwroot/dist/assets/i18n/${localeBase}.json`);
+		localizedStrings[localeBase] = require(`../ClientApp/assets/i18n/${localeBase}.json`);
 		store.dispatch({type: 'UPDATE_LOCALE', payload: locale});
 
 		// Prepare an instance of the application and perform an inital render that will
