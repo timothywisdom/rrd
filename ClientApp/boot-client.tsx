@@ -30,7 +30,7 @@ function renderApp() {
 
 	ReactDOM.render(
 		<AppContainer>
-			<IntlProvider locale={ localeLanguageBase } messages={ messages[localeLanguageBase] }>
+			<IntlProvider locale={ locale } messages={ localizedStrings[localeBase] }>
 				<Provider store={ store }>
 					<ConnectedRouter history={ history } children={ routes } />
 				</Provider>
@@ -54,11 +54,11 @@ function getLanguageFromContentLangageMeta(): (string | null) {
 }
 
 const locale: string = getLanguageFromContentLangageMeta() || 'en';
-const localeLanguageBase: string = locale.substring(0, 2);
+const localeBase: string = locale.substring(0, 2);
 const localeData: any = {};
-const messages: any = {};
+const localizedStrings: any = {};
 
-const fetchLocaleStrings = fetch(`./dist/assets/i18n/${localeLanguageBase}.json`)
+const fetchLocaleStrings = fetch(`./dist/assets/i18n/${localeBase}.json`)
 							.then((response) => {
 								if (response.status >= 400) {
 									throw new Error('Bad response from server');
@@ -67,7 +67,7 @@ const fetchLocaleStrings = fetch(`./dist/assets/i18n/${localeLanguageBase}.json`
 								return response.json();
 							})
 							.then((localeStrings) => {
-								messages[localeLanguageBase] = localeStrings;
+								localizedStrings[localeBase] = localeStrings;
 								addLocaleData([...en, ...fr]); // TODO - This needs to be dynamic
 								renderApp();
 							});

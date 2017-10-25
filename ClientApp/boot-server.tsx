@@ -20,19 +20,22 @@ export default createServerRenderer((params) => {
 		const store = configureStore(createMemoryHistory());
 		store.dispatch(replace(urlAfterBasename));
 
-		const locale: string = (params.data.localeLang || 'en').substring(0, 2);
-		const messages: any = {};
+		// Setup Localization
+		const locale: string = (params.data.localeLang || 'en'); // params.data.localeLang is passed from the dotnet server in /Views/Home/Index.cshtml
+		const localeBase: string = locale.substring(0, 2);
+		const localizedStrings: any = {};
 		const localeData: any = {};
-		if (fs.existsSync(`./node_modules/react-intl/locale-data/${locale}.js`)) {
-			localeData[locale] = fs.readFileSync(`./node_modules/react-intl/locale-data/${locale}.js`).toString();
+		if (fs.existsSync(`./node_modules/react-intl/locale-data/${localeBase}.js`)) {
+			localeData[localeBase] = fs.readFileSync(`./node_modules/react-intl/locale-data/${localeBase}.js`).toString();
 		}
-		messages[locale] = require(`../wwwroot/dist/assets/i18n/${locale}.json`);
+		localizedStrings[localeBase] = require(`../wwwroot/dist/assets/i18n/${localeBase}.json`);
+		store.dispatch({type: 'UPDATE_LOCALE', payload: locale});
 
 		// Prepare an instance of the application and perform an inital render that will
 		// cause any async tasks (e.g., data access) to begin
 		const routerContext: any = {};
 		const app = (
-			<IntlProvider locale={locale} messages={messages[locale]}>
+			<IntlProvider locale={locale} messages={localizedStrings[localeBase]}>
 				<Provider store={ store }>
 					<StaticRouter basename={ basename } context={ routerContext } location={ params.location.path } children={ routes } />
 				</Provider>
